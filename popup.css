@@ -1,6 +1,7 @@
 body {
   width: 20rem;
   background-color: greenyellow;
+  font-family: "Comic Sans MS";
 }
 
 ul {
@@ -39,6 +40,10 @@ ul {
   height: 25px; /* Slider handle height */
   background: #F00FF0; /* uwu background */
   cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #ff00c3;
 }
 
 .slider::-moz-range-thumb {

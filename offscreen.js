@@ -8,7 +8,6 @@ async function handleMessages(message) {
     }
     */
     console.log('du stinkst lool');
-    console.log(message);
     switch (message.type) {
         case 'playsound-default':
             playsoundDefault(message.data);
@@ -20,19 +19,7 @@ async function handleMessages(message) {
 }
 
 function playsoundDefault(data) {
-    //TODO: decode message and play corresponding sound file
     const audio = new Audio(data.source);
     audio.volume = data.volume;
     audio.play();
-    /*
-    switch (massage.soundtype) {
-      case 'de_m-1mono':
-        //play default sound
-        break;
-      case 'de_m-1stereo':
-
-      default:
-        console.log('no sound selected');
-    }
-    */
 }

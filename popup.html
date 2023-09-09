@@ -11,20 +11,36 @@
 <body>
 
   <h1>Coole Tab Extension</h1>
+  <p>Timeout (in seconds)</p>
+  <div class="slidecontainer">
+    <input type="number" min="1" id="timeoutinput" value="36000">
+    <button id="resettimeoutbutton">Reset</button>
+    <br>
+    Corresponds to <a id="hourscalc">x</a> hours
+  </div>
+  
   <p>Sound to play</p>
   <select name="soundbox" id="soundbox">
-    <option value="de_m-1">German Alpha Male</option>
-    <option value="de_m-2">German Beta Male</option>
-    <option value="m_uwu-1">uwu</option>
-    <option value="m_uwu_intense-1">UwU</option>
-    <option value="m_uwu_earrape-1">UWU</option>
+    <option value="de_m-1.ogg">German Alpha Male</option>
+    <option value="de_m-2.ogg">German Beta Male</option>
+    <option value="uwu_keksi.ogg">uwu</option>
+    <option value="uwu_keksi_intense.ogg">UwU</option>
+    <option value="uwu_keksi_earrape.ogg">UWU</option>
+    <option value="uwu_hannah.ogg">UwU Hannah</option>
+    <option value="f_moan-1.ogg">Moan</option>
+    <option value="metal_pipe_falling.ogg">Metal Pipe Falling</option>
+    <option value="samsung.ogg">Samsung Notification</option>
+    <option value="step_bro.ogg">What Are You Doing Step Bro</option>
+    <option value="ah_fuck.ogg">I Can't Believe You've Done This</option>
+    <option value="rickroll.ogg">Never Gonna Close A Tab</option>
+    <option value="cbt.ogg">CBT from Wikipedia</option>
   </select>
   <p>Volume</p>
   <div class="slidecontainer">
     <input type="range" min="0" max="1" value="1" step="any" class="slider" id="volumeslider">
   </div>
-  <button>Lorem ipsum</button>
-  <ul></ul>
+  <p></p>
+  <button id="previewbutton">Preview</button>
 
   <script src="./popup.js" type="module"></script>
 

@@ -4,7 +4,11 @@
 //Edit this global variable to change the time it takes until a tab closed plays a sound.
 //Enter in seconds
 //Default is 36000, which equals 10 hours
-var tabTimeOut = 36000;
+//Does not affect the value the popup resets to! Change seperately in popup.js
+var defaultTabTimeOut = 36000;
+
+//Edit this global variable to the sound file name (including file extension) of your desired default sound file
+var defaultSoundFile = 'de_m-1.ogg';
 
 
 
@@ -115,11 +119,17 @@ async function tabClosed(tabId, removeInfo) {
         let i;
         var tabFound = false;
         if (Object.keys(tabs).length === 0) {     //check if owotabs key in storage is empty
-
             console.log('array beim loeschen nicht vorhanden');
         } else {
             tabs = tabs['owotabs'];     //eine ebene raus nehmen
             console.log('array loaded');
+            var tabTimeOut = await chrome.storage.local.get(["nyatimeout"]);
+            if (Object.keys(tabTimeOut).length === 0) {
+                tabTimeOut = defaultTabTimeOut;
+                console.log('no timeout saved, set to default');
+            } else {
+                tabTimeOut = tabTimeOut['nyatimeout'];     //eine ebene raus nehmen;
+            }
             for (i = 0; i < tabs.length; i++) {
                 console.log('checking tab ' + i);
                 if (tabs[i].id === tabId) {
@@ -130,7 +140,7 @@ async function tabClosed(tabId, removeInfo) {
                         var soundFileName = await chrome.storage.local.get(["uwusound"]);
                         var volume = await chrome.storage.local.get(["rawrvolume"]);
                         if (Object.keys(soundFileName).length === 0) {
-                            soundFileName = 'de_m-1';
+                            soundFileName = defaultSoundFile;
                         } else {
                             soundFileName = soundFileName['uwusound'];      //eine ebene raus nehmen
                         }
@@ -139,8 +149,7 @@ async function tabClosed(tabId, removeInfo) {
                         } else {
                             volume = volume['rawrvolume'];      //eine ebene raus nehmen
                         }
-                        console.log(volume);
-                        sendToOffscreen('playsound-default', new SoundProperties('/sounds/' + soundFileName + '.ogg', volume) );
+                        sendToOffscreen('playsound-default', new SoundProperties('/sounds/' + soundFileName, volume));
                     }
                     tabFound = true;
                     break;
