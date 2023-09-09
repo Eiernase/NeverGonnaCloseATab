@@ -45,7 +45,6 @@ async function saveCacheToStorage() {
     if (!saveInProgress) {       //checks if there is currently an instance of this function processing data
         saveInProgress = true;   //if not, enable check and begin processing
         var tabs = await chrome.storage.local.get(["owotabs"]);
-        var openingStatus = false;
         if (Object.keys(tabs).length === 0) {     //check if owotabs key in storage is empty  
             tabs = [];      //if yes, create new array to save in
             console.log('array erstellt');
@@ -82,20 +81,21 @@ function isTabSavedYet(tabs) {
                     tabs[i].url = currentCache.splice(j, 1)[0].url;
                     console.log('tab with id is saved, url updated');
                     tabs[i].confirmed = true;
-                }
-                if (tabs[i].url === currentCache[j].url) {
+                    break;
+                } else if (tabs[i].url === currentCache[j].url) {
                     //sachen machen wenn die url stimmt
                     tabs[i].id = currentCache.splice(j, 1)[0].id;
                     console.log('tab with url is saved, id updated');
                     tabs[i].confirmed = true;
+                    break;
                 }
             }
         }
     }
     for (k = tabs.length - 1; k >= 0; k--) {
-        if (tabs[k].confirmed = false) {
+        if (tabs[k].confirmed == false) {
             tabs.splice(k, 1);
-            console.log('removed saved tab ' + k);      //
+            console.log('removed saved tab ' + k);
         }
     }
     for (i = 0; i < tabs.length; i++) {

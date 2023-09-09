@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Psychological Tab Manager",
     "short_name": "PTM",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Helps to not keep too many old tabs open by exploiting the human reward system",
     "author": "hufax.66@gmail.com",
     "homepage_url": "https://github.com/Eiernase/NeverGonnaCloseATab",
