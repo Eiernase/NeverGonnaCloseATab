@@ -1,0 +1,32 @@
+{
+    "manifest_version": 3,
+    "name": "Psychological Tab Manager",
+    "version": "1.0.0",
+    "description": "Helps to not keep too many old tabs open by exploiting the human reward system",
+    "icons": {
+        "16": "images/icon-16.png",
+        "32": "images/icon-32.png",
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
+    },
+    "permissions": [
+        "storage",
+        "tabs",
+        "offscreen"
+    ],
+    "background": {
+        "service_worker": "service_worker.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "images/icon-16.png"
+    },
+    "content_scripts": [
+        {
+            "js": ["scripts/content.js"],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ]
+}
