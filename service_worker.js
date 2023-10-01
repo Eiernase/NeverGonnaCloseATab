@@ -139,17 +139,65 @@ async function tabClosed(tabId, removeInfo) {
                         console.log('Yay, du hast einen alten Tab geschlossen');
                         var soundFileName = await chrome.storage.local.get(["uwusound"]);
                         var volume = await chrome.storage.local.get(["rawrvolume"]);
-                        if (Object.keys(soundFileName).length === 0) {
-                            soundFileName = defaultSoundFile;
-                        } else {
-                            soundFileName = soundFileName['uwusound'];      //eine ebene raus nehmen
-                        }
+                        var randomize = await chrome.storage.local.get(["grrandomize"]);
                         if (Object.keys(volume).length === 0) {
-                            volume = 1.0;
+                            volume = 1.0;       //set volume to 1.0 if not set yet
                         } else {
                             volume = volume['rawrvolume'];      //eine ebene raus nehmen
                         }
-                        sendToOffscreen('playsound-default', new SoundProperties('/sounds/' + soundFileName, volume));
+                        if (!(Object.keys(randomize).length === 0)) {
+                            if (randomize["grrandomize"]) {
+                                //randomize shit
+                                var listOfFiles = ["de_m-1.ogg", "de_m-2.ogg", "uwu_hannah.ogg", "f_moan-1.ogg", "metal_pipe_falling.ogg", "samsung.ogg", "step_bro.ogg", "cant_believe.ogg", "rickroll.ogg"];
+                                soundFileName = listOfFiles[Math.floor(Math.random() * listOfFiles.length)];
+                            } else {
+                                if (Object.keys(soundFileName).length === 0) {
+                                    soundFileName = defaultSoundFile;       //set soundFileName to default if not set yet
+                                } else {
+                                    soundFileName = soundFileName['uwusound'];      //eine ebene raus nehmen
+                                }
+                            }
+                        }
+                        sendToOffscreen('playsound-default', new SoundProperties('/sounds/' + soundFileName, volume));  //play awesome sound
+                        var notificationsEnabled = await chrome.storage.local.get(["ayaya"]);
+                        if (!(Object.keys(notificationsEnabled).length === 0)) {
+                            if (notificationsEnabled["ayaya"]) {
+                                var notifLanguage = await chrome.storage.local.get(["lelelelanguage"]);
+                                if (Object.keys(notifLanguage).length === 0) {
+                                    notifLanguage = "de";
+                                } else {
+                                    notifLanguage = notifLanguage["lelelelanguage"];
+                                }
+                                chrome.notifications.clear("ayaya");
+                                switch (notifLanguage) {
+                                    case 'de':
+                                        chrome.notifications.create("ayaya", {
+                                            type: "basic",
+                                            iconUrl: "images/kill-512.png",
+                                            title: "Yay",
+                                            message: "Du hast einen alten Tab geschlossen!",
+                                            silent: true
+                                        });
+                                        break;
+                                    case 'en':
+                                        chrome.notifications.create("ayaya", {
+                                            type: "basic",
+                                            iconUrl: "images/kill-512.png",
+                                            title: "Yay",
+                                            message: "You closed an old tab!",
+                                            silent: true
+                                        });
+                                        break;
+                                    default:
+                                        chrome.notifications.create("ayaya", {
+                                            type: "basic",
+                                            iconUrl: "images/kill-512.png",
+                                            title: "SUS",
+                                            message: "AMOGUS????? U BREAK MA SHIT MEEEN!!!!11"
+                                        });
+                                }
+                            }
+                        }
                     }
                     tabFound = true;
                     break;
