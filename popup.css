@@ -4,10 +4,22 @@ body {
   font-family: "Comic Sans MS";
 }
 
-ul {
-  list-style-type: none;
-  padding-inline-start: 0;
-  margin: 1rem 0;
+.logo {
+  position: relative;
+  top: 0px;
+  right: 0px;
+}
+
+#logo {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 80px;
+  width: 80px;
+}
+
+.header {
+  width: 80%;
 }
 
 .slidecontainer {

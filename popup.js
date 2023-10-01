@@ -17,10 +17,33 @@ function timeoutSelect() {
     document.getElementById('hourscalc').innerHTML = Math.round(timeoutValue / 3600 * 10000) / 10000;
 }
 
+function notificationSelect() {
+    chrome.storage.local.set({ 'ayaya': document.getElementById('displaycheckbox').checked });
+    if (document.getElementById('displaycheckbox').checked) {
+        document.getElementById('notificationlanguage').disabled = false;
+    } else {
+        document.getElementById('notificationlanguage').disabled = true;
+    }
+}
+
+function randomizeSelect() {
+    chrome.storage.local.set({ 'grrandomize': document.getElementById('randomizecheck').checked });
+    if (document.getElementById('randomizecheck').checked) {
+        document.getElementById('soundbox').disabled = true;
+    } else {
+        document.getElementById('soundbox').disabled = false;
+    }
+}
+
+function languageSelect() {
+    chrome.storage.local.set({ 'lelelelanguage': document.getElementById('notificationlanguage').value })
+}
+
 function resetTimeout() {
     //reset
     chrome.storage.local.set({ 'nyatimeout': resetValue });
     document.getElementById('timeoutinput').value = resetValue;
+    document.getElementById('hourscalc').innerHTML = Math.round(resetValue / 3600 * 10000) / 10000;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -29,7 +52,19 @@ document.addEventListener('DOMContentLoaded', function () {
     var preview = document.getElementById('previewbutton');
     var timeout = document.getElementById('timeoutinput');
     var resettimeout = document.getElementById('resettimeoutbutton');
+    var checkbox = document.getElementById('displaycheckbox');
+    var notificationlanguage = document.getElementById('notificationlanguage');
+    var randomize = document.getElementById('randomizecheck');
     loadDisplaySaved();
+    checkbox.addEventListener('click', function () {
+        notificationSelect();
+    });
+    randomize.addEventListener('click', function () {
+        randomizeSelect();
+    });
+    notificationlanguage.addEventListener('input', function () {
+        languageSelect();
+    });
     timeout.addEventListener('input', function () {
         if (!(this.value == null) || !(this.value == "")) {
             timeoutSelect();
@@ -53,6 +88,9 @@ async function loadDisplaySaved() {
     var savedSound = await chrome.storage.local.get(["uwusound"]);
     var savedVolume = await chrome.storage.local.get(["rawrvolume"]);
     var savedTimeout = await chrome.storage.local.get(["nyatimeout"]);
+    var savedNotification = await chrome.storage.local.get(["ayaya"]);
+    var savedLang = await chrome.storage.local.get(["lelelelanguage"]);
+    var savedRandom = await chrome.storage.local.get(["grrandomize"]);
     if (!(Object.keys(savedSound).length === 0)) {
         document.getElementById('soundbox').value = savedSound['uwusound'];
         console.log('loaded sound');
@@ -65,11 +103,65 @@ async function loadDisplaySaved() {
         document.getElementById('timeoutinput').value = savedTimeout['nyatimeout'];
         console.log('loaded timeout');
         document.getElementById('hourscalc').innerHTML = Math.round(savedTimeout['nyatimeout'] / 3600 * 10000) / 10000;
+    } else {
+        document.getElementById('hourscalc').innerHTML = Math.round(document.getElementById('timeoutinput').value / 3600 * 10000) / 10000;
+    }
+    if (!(Object.keys(savedNotification).length === 0)) {
+        document.getElementById('displaycheckbox').checked = savedNotification['ayaya'];
+        if (!savedNotification['ayaya']) {
+            document.getElementById('notificationlanguage').disabled = true;
+        }
+    }
+    if (!(Object.keys(savedLang).length === 0)) {
+        document.getElementById('notificationlanguage').value = savedLang['lelelelanguage'];
+    }
+    if (!(Object.keys(savedRandom).length === 0)) {
+        document.getElementById('randomizecheck').checked = savedRandom['grrandomize'];
+        if (savedRandom['grrandomize']) {
+            document.getElementById('soundbox').disabled = true;
+        }
     }
 }
 
 function playPreview() {
-    const audio = new Audio('/sounds/' + document.getElementById('soundbox').value);
+    var soundFileName = "de_m-1.ogg";
+    if (document.getElementById('randomizecheck').checked) {
+        var listOfFiles = document.getElementById('soundbox').getElementsByTagName('option');
+        soundFileName = listOfFiles[(Math.floor(Math.random() * listOfFiles.length))].value;
+    } else {
+        soundFileName = document.getElementById('soundbox').value;
+    }
+    const audio = new Audio('/sounds/' + soundFileName);
     audio.volume = document.getElementById('volumeslider').value;
     audio.play();
+    if (document.getElementById('displaycheckbox').checked) {
+        chrome.notifications.clear("ayaya");
+        switch (document.getElementById('notificationlanguage').value) {
+            case "de":
+                chrome.notifications.create("ayaya", {
+                    type: "basic",
+                    iconUrl: "images/kill-512.png",
+                    title: "Yay",
+                    message: "Du hast einen alten Tab geschlossen!",
+                    silent: true
+                });
+                break;
+            case "en":
+                chrome.notifications.create("ayaya", {
+                    type: "basic",
+                    iconUrl: "images/kill-512.png",
+                    title: "Yay",
+                    message: "You closed an old tab!",
+                    silent: true
+                });
+                break;
+            default:
+                chrome.notifications.create("ayaya", {
+                    type: "basic",
+                    iconUrl: "images/kill-512.png",
+                    title: "SUS",
+                    message: "AMOGUS????? U BREAK MA SHIT MEEEN!!!!11"
+                });
+        }
+    }
 }
