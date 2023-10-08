@@ -200,6 +200,12 @@ async function tabClosed(tabId, removeInfo) {
                                     soundFileName = soundFileName['uwusound'];      //eine ebene raus nehmen
                                 }
                             }
+                        } else {
+                            if (Object.keys(soundFileName).length === 0) {
+                                soundFileName = defaultSoundFile;       //set soundFileName to default if not set yet
+                            } else {
+                                soundFileName = soundFileName['uwusound'];      //eine ebene raus nehmen
+                            }
                         }
                         sendToOffscreen('playsound-default', new SoundProperties('./sounds/' + soundFileName, volume));  //play awesome sound
                         var notificationsEnabled = await chrome.storage.local.get(["ayaya"]);

@@ -22,6 +22,20 @@ the extension needs to be installed as an unpacked extension with developer mode
 6. Select source code folder
 7. Enjoy
 
+## Chromium
+Download the .crx file from the [Releases Page](https://github.com/Eiernase/NeverGonnaCloseATab/releases/) and drop it onto the browser or in some cases the extension page.
+
+## Microsoft Edge
+For Microsoft Edge the same procedure as for Google Chrome applies:
+
+1. Download source code
+2. Unpack
+3. Go to edge://extensions
+4. Enable "Developer Mode"
+5. Click on "Load unpacked"
+6. Select source code folder
+7. Enjoy
+
 ## Operra
 While Operra is chromium-based and the extension installs successfully, 
 it is not able to play the sound upon closing a tab because the offscreen document api (which is used to play the sound) is not supported. 
