@@ -1,6 +1,3 @@
-//TODO: Implement multi-window usage, closing a second window currently resets saved array
-//closing second window sets chromeStarting to true, which causes opening a new tab in old window to delete all existing tabs, maybe work with checking currently open tabs
-
 //Edit this global variable to change the time it takes until a tab closed plays a sound.
 //Enter in seconds
 //Default is 36000, which equals 10 hours
@@ -37,33 +34,82 @@ class SoundProperties {
     }
 }
 
+class navTab {
+    constructor(id, url) {
+        this.id = id;
+        this.url = url;
+    }
+}
+
 var currentCache = [];
+var navCache = [];
 var saveInProgress = false;
-var chromeStarting = true;
+var navProcessInProgress = false;
 
 async function saveCacheToStorage() {
     if (!saveInProgress) {       //checks if there is currently an instance of this function processing data
         saveInProgress = true;   //if not, enable check and begin processing
         var tabs = await chrome.storage.local.get(["owotabs"]);
+        var openTabs = await chrome.tabs.query({});
+        let i;
+        for (i = 0; i < openTabs.length; i++) {
+            currentCache[currentCache.length] = new AcidTab(openTabs[i].id, Date.now(), openTabs[i].pendingUrl == null ? openTabs[i].url : openTabs[i].pendingUrl);
+        }
         if (Object.keys(tabs).length === 0) {     //check if owotabs key in storage is empty  
             tabs = [];      //if yes, create new array to save in
             console.log('array erstellt');
         } else {
             tabs = tabs['owotabs'];     //eine ebene raus nehmen
-            if (chromeStarting) {
-                isTabSavedYet(tabs);
-            }
+            isTabSavedYet(tabs);
         }
         while (currentCache.length > 0) {
-            var splicedTab = currentCache.splice(0, 1)[0];
-            tabs[tabs.length] = splicedTab;       //eine ebene aus cache splice raus nehmen
+            tabs[tabs.length] = currentCache.splice(0, 1)[0];       //eine ebene aus cache splice raus nehmen
             console.log('spliced 1 from cache to array');
-
         }
         chrome.storage.local.set({ "owotabs": tabs }).then(() => {      //store cache variable in storage
             console.log('stored array with new tabs in storage');
         });
         saveInProgress = false;  //resets processing state boolean
+    }
+}
+
+async function processNavigation() {
+    if (!navProcessInProgress) {
+        var anythingChanged = false;
+        navProcessInProgress = true;
+        var tabs = await chrome.storage.local.get(["owotabs"]);
+        if (Object.keys(tabs).length === 0) {     //check if owotabs key in storage is empty  
+            tabs = [];      //if yes, create new array to save in
+            console.log('array erstellt nav');
+        } else {
+            tabs = tabs['owotabs'];     //eine ebene raus nehmen
+            let i;
+            let j;
+            for (i = navCache.length - 1; i >= 0; i--) {
+                console.log('starting check for navigation ' + i);
+                for (j = 0; j < tabs.length; j++) {
+                    console.log('checking if nav id matches tabid ' + j);
+                    if (navCache[i].id === tabs[j].id) {
+                        if (!(navCache[i].url === tabs[j].url)) {
+                            console.log('matches, old url: ' + tabs[j].url + ' new url: ' + navCache[i].url);
+                            tabs[j].url = navCache.splice(i, 1)[0].url;
+                            console.log('matches and url is new, updated');
+                            anythingChanged = true;
+                        } else {
+                            navCache.splice(i, 1);
+                            console.log('matches but url is the same');
+                        }
+                        break;
+                    }
+                }
+            }
+            if (anythingChanged) {
+                chrome.storage.local.set({ "owotabs": tabs }).then(() => {      //store cache variable in storage
+                    console.log('stored array with updated urls in storage');
+                });
+            }
+        }
+        navProcessInProgress = false;
     }
 }
 
@@ -76,7 +122,7 @@ function isTabSavedYet(tabs) {
         for (i = 0; i < tabs.length; i++) {
             console.log('checking if currentCache tab ' + j + ' matches saved tab ' + i);
             if (!tabs[i].confirmed) {
-                if (tabs[i].id === currentCache[0].id) {
+                if (tabs[i].id === currentCache[j].id) {
                     //sachen machen wenn die id stimmt
                     tabs[i].url = currentCache.splice(j, 1)[0].url;
                     console.log('tab with id is saved, url updated');
@@ -101,14 +147,11 @@ function isTabSavedYet(tabs) {
     for (i = 0; i < tabs.length; i++) {
         tabs[i].confirmed = false;
     }
-    chromeStarting = false;
 }
 
 function newTab(tab) {
     console.log(tab.id);
     //print id of new tab
-    var lsd25 = new AcidTab(tab.id, Date.now(), tab.pendingUrl == null ? tab.url : tab.pendingUrl);
-    currentCache[currentCache.length] = lsd25;
     saveCacheToStorage();
     //save tab id with creation time
 }
@@ -148,7 +191,7 @@ async function tabClosed(tabId, removeInfo) {
                         if (!(Object.keys(randomize).length === 0)) {
                             if (randomize["grrandomize"]) {
                                 //randomize shit
-                                var listOfFiles = ["de_m-1.ogg", "de_m-2.ogg", "uwu_hannah.ogg", "f_moan-1.ogg", "metal_pipe_falling.ogg", "samsung.ogg", "step_bro.ogg", "cant_believe.ogg", "rickroll.ogg"];
+                                var listOfFiles = ["de_m-1.ogg", "de_m-2.ogg", "uwu_hannah.ogg", "f_moan-1.ogg", "metal_pipe_falling.ogg", "samsung.ogg", "step_bro.ogg", "cant_believe.ogg", "rickroll.ogg", "vine_boom.ogg", "amongus_drip.ogg", "amongus_driplong.ogg", "amongus_kill.ogg", "amongus_roundstart.ogg"];
                                 soundFileName = listOfFiles[Math.floor(Math.random() * listOfFiles.length)];
                             } else {
                                 if (Object.keys(soundFileName).length === 0) {
@@ -158,7 +201,7 @@ async function tabClosed(tabId, removeInfo) {
                                 }
                             }
                         }
-                        sendToOffscreen('playsound-default', new SoundProperties('/sounds/' + soundFileName, volume));  //play awesome sound
+                        sendToOffscreen('playsound-default', new SoundProperties('./sounds/' + soundFileName, volume));  //play awesome sound
                         var notificationsEnabled = await chrome.storage.local.get(["ayaya"]);
                         if (!(Object.keys(notificationsEnabled).length === 0)) {
                             if (notificationsEnabled["ayaya"]) {
@@ -216,14 +259,7 @@ async function tabClosed(tabId, removeInfo) {
         }
         console.log(tabId);     //print id of closed tab
 
-    } else {
-        chromeStarting = true;      //TODO: add check for second window
     }
-}
-
-
-function chromeIsStarting() {
-    chromeStarting = true;
 }
 
 async function sendToOffscreen(type, data) {
@@ -257,8 +293,15 @@ async function hasDocument() {
     return false;
 }
 
+function navigationCommitted(id, navdata) {
+    if (navdata.url) {     //check if a navigation occured in the main tab
+        navCache[navCache.length] = new navTab(id, navdata.url);     //save the new url and the tab id to cache
+        processNavigation();    //process cache
+    }
+}
+
 chrome.tabs.onCreated.addListener(newTab);
 
 chrome.tabs.onRemoved.addListener(tabClosed);
 
-chrome.runtime.onStartup.addListener(() => { chromeStarting = true; });
+chrome.tabs.onUpdated.addListener(navigationCommitted);

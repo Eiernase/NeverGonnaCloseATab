@@ -10,7 +10,7 @@
 
 <body>
 
-  
+
   <div class="logo"><img id="logo" src="images/amoGUS.png"></div>
   <h1 class="header">Psychological Tab Manager</h1>
   <div>
@@ -19,7 +19,7 @@
     <input type="number" min="1" id="timeoutinput" value="36000" name="timeoutinput">
     <button id="resettimeoutbutton">Reset</button>
     <br>
-    Corresponds to <a id="hourscalc">x</a> hours
+    <div id="displayhours">Corresponds to <a id="hourscalc">x</a> hours</div>
   </div>
   <br>
   <div>
@@ -35,22 +35,27 @@
       <option value="step_bro.ogg">What Are You Doing Step Bro</option>
       <option value="cant_believe.ogg">I Can't Believe You've Done This</option>
       <option value="rickroll.ogg">Never Gonna Close A Tab</option>
+      <option value="vine_boom.ogg">Vine Boom</option>
+      <option value="amongus_roundstart.ogg">Among Us Round Start</option>
+      <option value="amongus_kill.ogg">Among Us Kill</option>
+      <option value="amongus_drip.ogg">Among Us Drip</option>
+      <option value="amongus_driplong.ogg">Among Us Drip (Long)</option>
     </select>
     <input type="checkbox" id="randomizecheck" name="randomizecheck">
     <label for="randomizecheck">Randomize</label>
   </div>
   <br>
   <div>
-  <label for="volumeslider">Volume</label>
-  <div class="slidecontainer">
-    <input type="range" min="0" max="1" value="1" step="any" class="slider" id="volumeslider" name="volumeslider">
-  </div>
+    <label for="volumeslider">Volume</label>
+    <div class="slidecontainer">
+      <input type="range" min="0" max="1" value="1" step="any" class="slider" id="volumeslider" name="volumeslider">
+    </div>
   </div>
   <br>
   <div>
     <input type="checkbox" id="displaycheckbox" name="displaycheckbox">
     <label for="displaycheckbox">Display notification upon triggering in</label>
-    <select name="notificationlanguage" id="notificationlanguage">
+    <select name="notificationlanguage" id="notificationlanguage" disabled>
       <option value="de">German</option>
       <option value="en">English</option>
     </select>

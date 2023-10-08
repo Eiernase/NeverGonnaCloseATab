@@ -8,13 +8,41 @@ function soundSelect() {
 
 function volumeSelect() {
     chrome.storage.local.set({ 'rawrvolume': document.getElementById('volumeslider').value });
+    if (document.getElementById('volumeslider').value == 0) {
+        document.getElementById('soundbox').disabled = true;
+        document.getElementById('randomizecheck').disabled = true;
+    } else {
+        if (document.getElementById('randomizecheck').checked) {
+            document.getElementById('soundbox').disabled = true;
+        } else {
+            document.getElementById('soundbox').disabled = false;
+        }
+        document.getElementById('randomizecheck').disabled = false;
+    }
 }
 
 function timeoutSelect() {
     //if (!document.getElementById('timeoutimput').value == 'null') {
     var timeoutValue = document.getElementById('timeoutinput').value
     chrome.storage.local.set({ 'nyatimeout': timeoutValue });
-    document.getElementById('hourscalc').innerHTML = Math.round(timeoutValue / 3600 * 10000) / 10000;
+    correspondsTo(timeoutValue);
+}
+
+function correspondsTo(inputvalue) {
+    var correspondingUnit = 'imposters';
+    var correspondingValue = 0;
+    if (inputvalue > 3600) {
+        correspondingUnit = 'hours';
+        correspondingValue = Math.round(inputvalue / 3600 * 10000) / 10000;
+        document.getElementById('displayhours').style.visibility = 'visible';
+    } else if (inputvalue > 60) {
+        correspondingUnit = 'minutes';
+        correspondingValue = Math.round(inputvalue / 60 * 100) / 100;
+        document.getElementById('displayhours').style.visibility = 'visible';
+    } else {
+        document.getElementById('displayhours').style.visibility = 'hidden';
+    }
+    document.getElementById('displayhours').innerHTML = 'Corresponds to ' + correspondingValue + ' ' + correspondingUnit;
 }
 
 function notificationSelect() {
@@ -97,19 +125,25 @@ async function loadDisplaySaved() {
     }
     if (!(Object.keys(savedVolume).length === 0)) {
         document.getElementById('volumeslider').value = savedVolume['rawrvolume'];
+        if (savedVolume['rawrvolume'] == 0) {
+            document.getElementById('soundbox').disabled = true;
+            document.getElementById('randomizecheck').disabled = true;
+        }
         console.log('loaded volume');
     }
     if (!(Object.keys(savedTimeout).length === 0)) {
         document.getElementById('timeoutinput').value = savedTimeout['nyatimeout'];
         console.log('loaded timeout');
-        document.getElementById('hourscalc').innerHTML = Math.round(savedTimeout['nyatimeout'] / 3600 * 10000) / 10000;
+        correspondsTo(savedTimeout['nyatimeout']);
     } else {
-        document.getElementById('hourscalc').innerHTML = Math.round(document.getElementById('timeoutinput').value / 3600 * 10000) / 10000;
+        correspondsTo(document.getElementById('timeoutinput').value);
     }
     if (!(Object.keys(savedNotification).length === 0)) {
         document.getElementById('displaycheckbox').checked = savedNotification['ayaya'];
         if (!savedNotification['ayaya']) {
             document.getElementById('notificationlanguage').disabled = true;
+        } else {
+            document.getElementById('notificationlanguage').disabled = false;
         }
     }
     if (!(Object.keys(savedLang).length === 0)) {
@@ -131,7 +165,7 @@ function playPreview() {
     } else {
         soundFileName = document.getElementById('soundbox').value;
     }
-    const audio = new Audio('/sounds/' + soundFileName);
+    const audio = new Audio('./sounds/' + soundFileName);
     audio.volume = document.getElementById('volumeslider').value;
     audio.play();
     if (document.getElementById('displaycheckbox').checked) {
