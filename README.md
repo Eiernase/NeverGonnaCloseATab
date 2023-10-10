@@ -9,7 +9,7 @@ The measurement for how long a tab has been open is saved between sessions!
 Because tabs mainly pile up when restoring last open tabs on the next launch.
 
 # Installation
-The Extension currently only works on chromium-based browsers supporting manifest v3. The .crx packages under "Releases" usually simply be dropped onto the browser window.
+The Extension currently only works on chromium-based browsers supporting manifest v3.
 ## Google Chrome
 Since Google Chrome does not allow for installing extensions which are not listed on the Chrome Web Store (and I don't have a credit card to pay 5$ to create a developer account), 
 the extension needs to be installed as an unpacked extension with developer mode active: 
