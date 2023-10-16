@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Psychological Tab Manager",
     "short_name": "PTM",
-    "version": "1.3.2",
+    "version": "1.4.0",
     "description": "Helps to not keep too many old tabs open by exploiting the human reward system",
     "author": "hufax.66@gmail.com",
     "homepage_url": "https://github.com/Eiernase/NeverGonnaCloseATab",
@@ -10,6 +10,7 @@
         "16": "images/icon-16.png",
         "32": "images/icon-32.png",
         "48": "images/icon-48.png",
+        "96": "images/icon-96.png",
         "128": "images/icon-128.png"
     },
     "permissions": [
@@ -34,5 +35,5 @@
             ]
         }
     ],
-    "key": "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDnjaUChxDg7la/suCsGPj1gtKZAK9E3WI+X94mD1lvP88BfdzWZcyyXCr7tRfeKEsumD92hU33KVJB6Zu9zKMLWmMJm+jKG7pWqqfKp/MlKuYDG4tkIRZlydq1pNQm3gPYnT3VPhc0mv+0WWavurfMuFlexFyjAbnzQO2OYDk1BLDqvtyvXt66CiEF5g06jmNX+a/KnQik+7gD+7tF+1yTYBfWQzkLXFLIIB4BWfwUK/ypN4c1IgoLJNrwPIiT9DXNKsUM6qcufNGAJylT1e3oqhphw7HDynJfiWiuMwjM5yYeg8KFSqUkcZ0H8CHLdVd7WuGgIz98LWykhakvnkflAgMBAAECggEAY5ZxejlSApOvXqpV496nsJvv7Js1RoZ6mv4LYs4mNmk4pFkYEmPdGnb2i6RS3BrzXtpfLR/fLOaqOKv67jIli5v3zWmvQMGVLnIeUVRTiFA/deWyWUG7ytJ6jLYUApVpDRBvyBd4zoi9YjkzJ3BEXbmJwm7ssrTq31q08Q+kew60dzQtYTB+3msYWynhzqhviMWjC2kqvUNIe6zu5QsobBTC9DazD8OKTinBRuhIJuzqmg86Rgf4Coms+T0mhQhv2uAZCSTOkr+CIJXBQAaYId/E8Ed9p7LKDY9JE7dTaQ9GumVmIWJDLs7tEoZEwVIUF6Yqey5j5yYsVqFeT18GbwKBgQD4/PDmeh46f9W3UKEScznWVczwxOLvOirU/1WlJbLvlRuSjJ3645SB25d8lwlbcRFKs7yL7f+X88Cm3pi19WYX+yCkPUl//uZPmDnmKC/tyhf9QGnnE1SvwJo0IZ+lErgvASTe4ON20TVElY7X2gRlwG76o+quyWXAtiHgLg7SNwKBgQDuEwJWxwaKhmpIT1TWcbxjQUcJaA9MsBUX1RzJqElIyxY9vK+STJz12dr0H1JELUKP2tfnm4/eizZXhvgkGsnjdqTpHHxivQpZfRU9ag4E8m1Esngowz9TzcO3ucU8qRkMBCb/AmNoGO9foaMTC0JiYr43gZ1iGwEBDrP0qtkYwwKBgQDWKxw744bk4ti+GciyyhJR3vOtlm1tQSdel1Lf/xFvK17QK8wn5mHzYSNos7IEybkJ/JiN9GYKGkz4PDg3K6JptkVZgK4cPvF0PYhwBNlVPKRt3l45uVL66jy54sIjh3qOU/mXDPIbXdDn8Y0w9gMaUvAi/6P6PJodrYxt/LAa+QKBgQCfQoYhCNjeWBbHMpKdNc6BU0yzBTKe6XfizoSIfhQwJvNE73E/3BJwAIGRJ1bAFsrdMteVryHqDJSYrshWVrlRea/N5WlsH+vJe3x27fhc5NOlzgHFuv8lD5Pq1tITx0bjG+/+TVm0bGHNRnKxramF6Wo39XQUCd59F5nYhWXfQwKBgQDZK2oLURRlbRqJuF4RIl6xA4XCvn+X/neR8ZjBVaQpJOJh5hYfImcJze45k2ulcTokK6Fi2MeOSMGkqq8SLtnNIOMvx7w3BWNCthqYjDH/io+LxdS5UUe29kaxIOmPyArFFF/4ujJV0Yz0VYaz5fZSNNZ+KJrsTsubs7RDMlNkcw=="
+    "update_url": "https://kueheaufdsl.de/updates.xml"
 }

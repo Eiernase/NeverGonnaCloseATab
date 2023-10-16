@@ -3,13 +3,14 @@ Psychological Tab Manager helps you Pavlov yourself into closing old tabs more o
 upon closing a tab that has been open and unused for a long time. 
 
 It comes with an easy-to-use control panel featuring a funky, eye-catching design and options for customization, 
-like changing the played sound and the timeout until it's triggered.
+like changing the played sound and the timeout until it's triggered. 
 
 The measurement for how long a tab has been open is saved between sessions! 
-Because tabs mainly pile up when restoring last open tabs on the next launch.
+Because tabs mainly pile up when restoring last open tabs on the next launch. 
+
+You can select from a pre-defined list of sounds to play or even upload your own!
 
 # Installation
-The Extension currently only works on chromium-based browsers supporting manifest v3. The .crx packages under "Releases" usually simply be dropped onto the browser window.
 ## Google Chrome
 Since Google Chrome does not allow for installing extensions which are not listed on the Chrome Web Store (and I don't have a credit card to pay 5$ to create a developer account), 
 the extension needs to be installed as an unpacked extension with developer mode active: 
@@ -23,7 +24,8 @@ the extension needs to be installed as an unpacked extension with developer mode
 7. Enjoy
 
 ## Chromium
-Download the .crx file from the [Releases Page](https://github.com/Eiernase/NeverGonnaCloseATab/releases/) and drop it onto the browser or in some cases the extension page.
+Download the .crx file from the [Releases Page](https://github.com/Eiernase/NeverGonnaCloseATab/releases/) and drop it onto the browser or in some cases the extension page. 
+You may need to enable "Developer Mode".
 
 ## Microsoft Edge
 For Microsoft Edge the same procedure as for Google Chrome applies:
@@ -36,12 +38,15 @@ For Microsoft Edge the same procedure as for Google Chrome applies:
 6. Select source code folder
 7. Enjoy
 
-## Operra
-While Operra is chromium-based and the extension installs successfully, 
-it is not able to play the sound upon closing a tab because the offscreen document api (which is used to play the sound) is not supported. 
+## Operra GX
 
-I have submitted the extension to the Operra Web Store before finding this out. It is available on Developer and Beta but as of now still pending for review on Stable.
+1. Download the [latest release](https://github.com/Eiernase/NeverGonnaCloseATab/releases/) using Operra
+2. It will tell you that the extension has been disabled 
+3. Open the extension manager 
+4. Click on "Install" 
+
+I have submitted the extension to the Operra Web Store and it's pending for review, but their store seems to be unmoderated.
 
 ## Firefox
-Firefox *says* they support manifest v3, but many features are indeed still manifest v2. The service worker can not be recognized (because service workers aren't supported yet), 
-and such the extension is deemed as being faulty and cannot be installed.
+The version found in this repository is built for chromium-based browsers supporting Manifest v3. 
+For Firefox, see [this repository](https://github.com/Eiernase/ThisTabIsOnFire/) instead.

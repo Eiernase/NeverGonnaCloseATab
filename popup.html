@@ -14,12 +14,18 @@
   <div class="logo"><img id="logo" src="images/amoGUS.png"></div>
   <h1 class="header">Psychological Tab Manager</h1>
   <div>
-    <label for="timeoutinput">Timeout (in seconds)</label>
+    <label for="timeoutinput">Timeout</label>
     <br>
-    <input type="number" min="1" id="timeoutinput" value="36000" name="timeoutinput">
-    <button id="resettimeoutbutton">Reset</button>
+    <input type="number" min="1" id="timeoutinput" value="10" name="timeoutinput">
+    <select id="unitselect">
+      <option value="0">Seconds</option>
+      <option value="1">Minutes</option>
+      <option value="2" selected>Hours</option>
+      <option value="3">Days</option>
+    </select>
+    <a id="resettimeoutbutton">Reset</a>
     <br>
-    <div id="displayhours">Corresponds to <a id="hourscalc">x</a> hours</div>
+    <div id="displayhours">Corresponds to 10 hours</div>
   </div>
   <br>
   <div>
@@ -37,12 +43,21 @@
       <option value="rickroll.ogg">Never Gonna Close A Tab</option>
       <option value="vine_boom.ogg">Vine Boom</option>
       <option value="amongus_roundstart.ogg">Among Us Round Start</option>
-      <option value="amongus_kill.ogg">Among Us Kill</option>
+      <option value="amongus_kill.ogg" selected>Among Us Kill (Impostor)</option>
+      <option value="amongus_kill_crewmate.ogg">Among Us Kill (Crewmate)</option>
       <option value="amongus_drip.ogg">Among Us Drip</option>
       <option value="amongus_driplong.ogg">Among Us Drip (Long)</option>
+      <option value="custom">Custom...</option>
     </select>
-    <input type="checkbox" id="randomizecheck" name="randomizecheck">
-    <label for="randomizecheck">Randomize</label>
+    <div class="randomize" id="chungusdiv">
+      <label for="randomizecheck"><input type="checkbox" id="randomizecheck" name="randomizecheck">Random</label>
+    </div>
+  </div>
+  <br>
+  <div class="fileselect" id="fileselect">
+    <label for="fileinput">Upload your own (max 3 MB)</label>
+    <input type="file" id="fileinput" accept="audio/*">
+    <a id="fileinfo">None Selected</a>
   </div>
   <br>
   <div>
@@ -52,16 +67,16 @@
     </div>
   </div>
   <br>
-  <div>
-    <input type="checkbox" id="displaycheckbox" name="displaycheckbox">
-    <label for="displaycheckbox">Display notification upon triggering in</label>
+  <div class="notification">
+    <label for="displaycheckbox"><input type="checkbox" id="displaycheckbox" name="displaycheckbox">Display notification upon triggering in</label>
     <select name="notificationlanguage" id="notificationlanguage" disabled>
-      <option value="de">German</option>
       <option value="en">English</option>
+      <option value="de">German</option>
     </select>
   </div>
   <br>
-  <button id="previewbutton">Preview</button>
+  <a id="previewbutton">Preview</a>
+  <div id="version">version xx69xx</div>
 
   <script src="./popup.js" type="module"></script>
 

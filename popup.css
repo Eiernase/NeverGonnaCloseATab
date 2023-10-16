@@ -2,56 +2,261 @@ body {
   width: 20rem;
   background-color: greenyellow;
   font-family: "Comic Sans MS";
+  font-size: 75%;
+  height: fit-content;
+  margin: 8px 8px 16px 8px;
+  -webkit-user-select: none;
+  user-select: none;
+  display: block;
+}
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
 }
 
 .logo {
-  position: relative;
-  top: 0px;
-  right: 0px;
+  float: right;
 }
 
 #logo {
-  position: absolute;
-  top: 0px;
-  right: 0px;
+  object-fit: contain;
   height: 80px;
   width: 80px;
 }
 
+#version {
+  float: right;
+  color: dimgray;
+}
+
+.fileselect {
+  visibility: hidden;
+}
+
+.fileselect label {
+  padding: 2px 4px;
+  border: 2px solid #f00ff0;
+  background-color: #43cdfe;
+  cursor: pointer;
+  text-align: center;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.fileselect label:hover {
+  opacity: 1;
+}
+
+.fileselect label:active {
+  background-color: #f00ff0;
+  transition: none;
+}
+
+.fileselect[chungussy] label {
+  color: gray;
+  cursor: default;
+  border-color: maroon;
+}
+
+.fileselect[chungussy] label:hover {
+  opacity: 0.8;
+}
+
+.fileselect[chungussy] label:active {
+  background-color: #43cdfe;
+}
+
+.fileselect[chungussy] a {
+  color: gray;
+}
+
+#fileinput {
+  visibility: hidden;
+  height: 0%;
+  width: 0%;
+}
+
+.randomize {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.randomize label {
+  cursor: pointer;
+  background-color: #43cdfe;
+  padding: 2px 2px 1px 0px;
+  border: 2px solid #f00ff0;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.randomize label:hover {
+  opacity: 1;
+}
+
+.randomize[chungussy] label {
+  cursor: default;
+  border-color: maroon;
+  color: gray;
+}
+
+.randomize[chungussy] label:hover {
+  opacity: 0.8;
+}
+
+.randomize[chungussy] input {
+  cursor: default;
+}
+
+.notification {
+  cursor: pointer;
+}
+
+.notification label {
+  cursor: pointer;
+  background-color: #43cdfe;
+  padding: 2px 3px 1px 0px;
+  border: 2px solid #f00ff0;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.notification label:hover {
+  opacity: 1;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
 .header {
-  width: 80%;
+  width: auto;
+}
+
+#previewbutton {
+  padding: 8px 16px;
+  border: 2px solid #f00ff0;
+  background-color: #43cdfe;
+  cursor: pointer;
+  text-align: center;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  margin: auto;
+  display: block;
+}
+
+#previewbutton:hover {
+  opacity: 1;
+}
+
+#previewbutton:active {
+  background-color: #f00ff0;
+  transition: none;
+}
+
+#resettimeoutbutton {
+  padding: 2px 4px;
+  border: 2px solid #f00ff0;
+  background-color: #43cdfe;
+  cursor: pointer;
+  text-align: center;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+#resettimeoutbutton:hover {
+  opacity: 1;
+}
+
+#resettimeoutbutton:active {
+  background-color: #f00ff0;
+  transition: none;
+}
+
+select {
+  font-family: "Comic Sans MS";
+  border: 2px solid #f00ff0;
+  background-color: #43cdfe;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+select:hover {
+  opacity: 1;
+}
+
+select[disabled] {
+  border-color: maroon;
+  cursor: default;
+}
+
+select:hover[disabled] {
+  opacity: 0.8;
+}
+
+#timeoutinput {
+  padding: 2px 4px;
+  border: 2px solid #f00ff0;
+  background-color: #43cdfe;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+#timeoutinput:hover {
+  opacity: 1;
 }
 
 .slidecontainer {
-  width: 100%; /* Width of the outside container */
+  width: 100%;
+  /* Width of the outside container */
 }
 
 /* The slider itself */
 .slider {
-  -webkit-appearance: none;  /* Override default CSS styles */
+  -webkit-appearance: none;
+  /* Override default CSS styles */
   appearance: none;
-  width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #43cdfe; /* Amazing background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  width: 99%;
+  /* Not Full-width */
+  height: 25px;
+  /* Specified height */
+  background: #43cdfe;
+  /* Amazing background */
+  outline: none;
+  /* Remove outline */
+  opacity: 0.8;
+  /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s;
+  /* 0.2 seconds transition on hover */
   transition: opacity .2s;
 }
 
 /* Mouse-over effects */
 .slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
+  opacity: 1;
+  /* Fully shown on mouse-over */
 }
 
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
+  -webkit-appearance: none;
+  /* Override default look */
   appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #F00FF0; /* uwu background */
-  cursor: pointer; /* Cursor on hover */
+  width: 25px;
+  /* Set a specific slider handle width */
+  height: 25px;
+  /* Slider handle height */
+  background: #f00ff0;
+  /* uwu background */
+  cursor: pointer;
+  /* Cursor on hover */
 }
 
 .slider::-webkit-slider-thumb:hover {
@@ -59,8 +264,12 @@ body {
 }
 
 .slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #F00FF0; /* uwu background */
-  cursor: pointer; /* Cursor on hover */
+  width: 25px;
+  /* Set a specific slider handle width */
+  height: 25px;
+  /* Slider handle height */
+  background: #f00ff0;
+  /* uwu background */
+  cursor: pointer;
+  /* Cursor on hover */
 }
