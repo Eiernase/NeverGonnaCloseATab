@@ -11,6 +11,7 @@ Because tabs mainly pile up when restoring last open tabs on the next launch.
 You can select from a pre-defined list of sounds to play or even upload your own!
 
 # Installation
+The Extension currently only works on chromium-based browsers supporting manifest v3.
 ## Google Chrome
 Since Google Chrome does not allow for installing extensions which are not listed on the Chrome Web Store (and I don't have a credit card to pay 5$ to create a developer account), 
 the extension needs to be installed as an unpacked extension with developer mode active: 
