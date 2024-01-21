@@ -13,9 +13,10 @@ You can select from a pre-defined list of sounds to play or even upload your own
 # Installation
 The Extension here only works on chromium-based browsers supporting manifest v3, but there is a [Firefox port](https://github.com/Eiernase/ThisTabIsOnFire/) available.
 ## Google Chrome
-Since Google Chrome does not allow for installing extensions which are not listed on the Chrome Web Store (and I don't have a credit card to pay 5$ to create a developer account), 
-the extension needs to be installed as an unpacked extension with developer mode active: 
+### Web Store
+[Install from Chrome Web Store](https://chrome.google.com/webstore/detail/edbmpofbknjgklpccbekamolmjabfibp)
 
+### Manually
 1. Download source code
 2. Unpack
 3. Go to chrome://extensions
@@ -29,7 +30,7 @@ Download the .crx file from the [Releases Page](https://github.com/Eiernase/Neve
 You may need to enable "Developer Mode".
 
 ## Microsoft Edge
-For Microsoft Edge the same procedure as for Google Chrome applies:
+For Microsoft Edge the same procedure as a manual Google Chrome install applies:
 
 1. Download source code
 2. Unpack
